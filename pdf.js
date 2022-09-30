@@ -3,13 +3,10 @@ function getPdfHandler() {
   return window['pdfjs-dist/build/pdf'];
 }
 
-
 let drawing = JSON.parse(localStorage.getItem('drawing'));
-const init=()=>{
+const init = () => {
   if (drawing[0]) document.getElementById('canvasimg1').src = drawing;
-}
-
-
+};
 
 const canvas = new fabric.Canvas('c');
 document.querySelector('input').addEventListener('change', async (e) => {
@@ -19,16 +16,16 @@ document.querySelector('input').addEventListener('change', async (e) => {
 
 async function pdfToImage(pdfData, canvas) {
   const scale = 4 / window.devicePixelRatio;
-  return (await printPDF(pdfData)).map(async (item,index) => {
-    if (index>0)return
-    console.log(item)
-      canvas.add(
-        new fabric.Image(await item, {
-          id:'pdf',
-          scaleX: scale/4,
-          scaleY: scale/4,
-        })
-      );
+  return (await printPDF(pdfData)).map(async (item, index) => {
+    if (index > 0) return;
+    console.log(item);
+    canvas.add(
+      new fabric.Image(await item, {
+        id: 'pdf',
+        scaleX: scale / 4,
+        scaleY: scale / 4,
+      })
+    );
   });
 }
 async function printPDF(pdfData, pages) {
@@ -76,24 +73,28 @@ function readBlob(blob) {
     reader.readAsDataURL(blob);
   });
 }
-
+let check = false;
 const chooseSign = document.getElementById('chooseSign');
-chooseSign.addEventListener('click',(e)=>{
-  if (e.target.nodeName!=='IMG')return
-  canvas.getObjects().forEach((item) => {
-    if (item.id == 'sign') {
-     return
-    }
-  });
-  const  sign = drawing; 
-  fabric.Image.fromURL(sign, function (sign) {
-    sign.id='sign'
-     canvas.add(sign);
-  });
-})
+chooseSign.addEventListener('click', (e) => {
+  if (e.target.nodeName !== 'IMG') return;
+  if (canvas.getObjects().length == 1) {
+    fabric.Image.fromURL(drawing, function (sign) {
+      sign.id = 'sign';
+      sign.top = 600;
+      sign.left = 200;
+      sign.scaleX = 0.5;
+      sign.scaleY = 0.5;
+      console.log(sign);
+      canvas.add(sign);
+    });
+  }else{
+    alert('請先選擇PDF檔案')
+  }
+});
+
 const picture = document.querySelector('.canvas-container');
 picture.addEventListener('mouseup', () => {
-  canvas.getObjects().forEach(item=> {
+  canvas.getObjects().forEach((item) => {
     if (item.id == 'sign') {
       canvas.setActiveObject(item);
     }
@@ -101,11 +102,11 @@ picture.addEventListener('mouseup', () => {
 });
 
 const download = document.getElementById('download');
-download.addEventListener('click',()=>{
+download.addEventListener('click', () => {
   canvas.discardActiveObject().renderAll();
-   html2canvas(document.getElementById('c'),{
-    onrendered:(canvas)=>{
-       return Canvas2Image.saveAsPNG(canvas);
-    }
-   })
-})
+  html2canvas(document.getElementById('c'), {
+    onrendered: (canvas) => {
+      return Canvas2Image.saveAsPNG(canvas);
+    },
+  });
+});
