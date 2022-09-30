@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDf sign</title>
+    <script src="https://unpkg.com/fabric@latest/dist/fabric.js"></script>
+    <script src="https://unpkg.com/pdfjs-dist@latest/build/pdf.min.js"></script>
+    <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  </head>
+  <body onload="init()">
+    <div style="width: 700px; margin: 0 auto; padding-bottom: 100px">
+      <a href="/Index.html">上一步</a>
+      <div style="margin-top: 20px">
+        <label
+          for="inputFile"
+          style="
+            padding: 5px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+          "
+          >請選擇PDF檔案</label
+        >
+        <input
+          id="inputFile"
+          type="file"
+          accept="application/pdf"
+          style="display: none"
+        />
+      </div>
+      <canvas
+        id="c"
+        width="600"
+        height="846"
+        style="border: 2px solid; margin-top: 20px; margin-bottom: 20px"
+      >
+      </canvas>
+      <div id="chooseSign" style="margin-top: 40px;display: flex;justify-content: space-between;">
+        <div>
+          <p>選擇簽名</p>
+          <img
+            id="canvasimg1"
+            data-id="0"
+            width="250"
+            height="120"
+            style="border: 1px solid"
+          />
+        </div>
+        <div>
+            <button id="download">下載檔案</button>
+        </div>
+      </div>
+    </div>
+    <script src="pdf.js"></script>
+  </body>
+</html>

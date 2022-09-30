@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDf sign</title>
+</head>
+ <body onload="init()">
+    <div style="width: 700px; margin:0 auto">
+        <canvas id="can" width="700" height="200" style="border:2px solid; margin:0 auto""></canvas>
+        <div style="display: flex; justify-content: center;">
+        <input type="button" value="save" id="btn" size="30" style="width:100px;height: 32px; margin: 4px;" onclick="save()" >
+        <input type="button" value="clear" id="clr" size="23" style="width:100px;height: 32px;margin: 4px;" onclick="erase()">
+       </div>
+       <div id="removeImg" style="margin-top: 16px; display: flex; justify-content: space-around;">
+        <div style="position:relative;">
+        <img id="canvasimg1" width="250" height="120"  style="border:1px solid">
+        </div>
+
+</div>
+        <a href="./pdf.html" style="display: block;">下一步</a>
+
+</div>
+
+        <script src="index.js"></script>
+        <script src="pdf.js"></script>
+    </body>
+</html>
