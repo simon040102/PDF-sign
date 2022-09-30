@@ -79,9 +79,12 @@ function readBlob(blob) {
 
 const chooseSign = document.getElementById('chooseSign');
 chooseSign.addEventListener('click',(e)=>{
-
   if (e.target.nodeName!=='IMG')return
-  
+  canvas.getObjects().forEach((item) => {
+    if (item.id == 'sign') {
+     return
+    }
+  });
   const  sign = drawing; 
   fabric.Image.fromURL(sign, function (sign) {
     sign.id='sign'
